@@ -1,0 +1,51 @@
+-- DBMS LAB 2
+-- Name: Ankit Raj
+-- Roll No: 23157128020
+-- Subject: DBMS
+-- College: BP Mandal College of Engineering, Madhepura
+-- Semester: 5th
+
+CREATE TABLE Department (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(100),
+    OfficeLocation VARCHAR(100)
+);
+
+CREATE TABLE Student (
+    StudentID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DateOfBirth DATE,
+    Gender VARCHAR(10),
+    ContactNumber VARCHAR(15),
+    DepartmentID INT,
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+);
+
+CREATE TABLE Faculty (
+    FacultyID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Designation VARCHAR(50),
+    Email VARCHAR(100),
+    DepartmentID INT,
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+);
+
+CREATE TABLE Course (
+    CourseID INT PRIMARY KEY,
+    CourseName VARCHAR(100),
+    Credits INT,
+    DepartmentID INT,
+    FacultyID INT,
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID),
+    FOREIGN KEY (FacultyID) REFERENCES Faculty(FacultyID)
+);
+
+CREATE TABLE Enrollment (
+    EnrollmentID INT PRIMARY KEY,
+    StudentID INT,
+    CourseID INT,
+    Semester VARCHAR(20),
+    Grade VARCHAR(5),
+    FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
+    FOREIGN KEY (CourseID) REFERENCES Course(CourseID)
+);
